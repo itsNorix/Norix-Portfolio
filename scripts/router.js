@@ -39,6 +39,10 @@ window.NORIX_ROUTER = (function () {
     newPage.innerHTML = pageModule.render();
     container.appendChild(newPage);
 
+    if (typeof pageModule.init === 'function') {
+      pageModule.init(newPage);
+    }
+
     // ── Animate out old page ──────────────────────────────────── //
     if (oldPage) {
       oldPage.classList.remove('page-active');
@@ -59,10 +63,6 @@ window.NORIX_ROUTER = (function () {
           }
           _isAnimating = false;
           newPage.scrollTop = 0;
-
-          if (typeof pageModule.init === 'function') {
-            pageModule.init(newPage);
-          }
         }, duration + 40);
       });
     });

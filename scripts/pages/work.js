@@ -63,7 +63,8 @@ window.NORIX_PAGES.work = {
     const videoWrappers = pageEl.querySelectorAll('.work-featured__video.is-playable');
     videoWrappers.forEach((wrap) => {
       const videoFile = wrap.dataset.videofile;
-      const videoId = wrap.dataset.videoid;
+      const rawVideoId = wrap.dataset.videoid;
+      const videoId = _extractYouTubeId(rawVideoId);
       const thumbUrl = wrap.dataset.thumb;
       const hasLocal = videoFile && videoFile.trim() !== '';
       const hasYouTube = videoId && !videoId.startsWith('YOUR_YOUTUBE_VIDEO_ID') && videoId.trim() !== '';
@@ -72,7 +73,7 @@ window.NORIX_PAGES.work = {
         if (wrap.querySelector('.yt-player-container') || wrap.querySelector('iframe')) return;
 
         const projTitle = wrap.dataset.title || '';
-        const projCat   = wrap.dataset.category || '';
+        const projCat = wrap.dataset.category || '';
 
         if (hasLocal) {
           _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat);
@@ -81,7 +82,7 @@ window.NORIX_PAGES.work = {
         }
       };
 
-      wrap.addEventListener('click', (e) => {
+      wrap.addEventListener('click', () => {
         if (!wrap.querySelector('.yt-player-container')) {
           startPlayback();
         }
@@ -470,12 +471,23 @@ function _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat)
    YouTube's native controls handle playback inside the frame.
 ────────────────────────────────────────────────────────────────── */
 
+function _extractYouTubeId(urlOrId) {
+  if (!urlOrId || typeof urlOrId !== 'string') return '';
+  const trimmed = urlOrId.trim();
+  const match = trimmed.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return trimmed;
+}
+
 function _mountYouTubeIframePlayer(wrap, videoId, thumbUrl, projTitle) {
+  const cleanId = _extractYouTubeId(videoId);
   wrap.innerHTML = `
     <div class="yt-player-container yt-player-iframe-mode" tabindex="0">
       <iframe
         class="yt-iframe-embed"
-        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&color=white"
+        src="https://www.youtube.com/embed/${cleanId}?autoplay=1&rel=0&enablejsapi=1"
         title="${projTitle || 'YouTube video player'}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -492,12 +504,14 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
     `<span class="work-tag">${t}</span>`
   ).join('');
 
+  const cleanYtId = _extractYouTubeId(proj.videoId);
+
   // Thumbnail
   let thumbUrl = '';
   if (proj.thumbnail && proj.thumbnail.trim()) {
     thumbUrl = proj.thumbnail.trim();
-  } else if (proj.videoId && !proj.videoId.startsWith('YOUR_YOUTUBE_VIDEO_ID') && proj.videoId.trim()) {
-    thumbUrl = `https://img.youtube.com/vi/${proj.videoId}/maxresdefault.jpg`;
+  } else if (cleanYtId && !cleanYtId.startsWith('YOUR_YOUTUBE_VIDEO_ID') && cleanYtId.trim()) {
+    thumbUrl = `https://img.youtube.com/vi/${cleanYtId}/hqdefault.jpg`;
   }
 
   // Release status logic
@@ -505,7 +519,7 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
   const releaseDate = proj.releaseDate || '';
 
   const hasLocal = proj.videoFile && proj.videoFile.trim() !== '';
-  const hasYouTube = proj.videoId && !proj.videoId.startsWith('YOUR_YOUTUBE_VIDEO_ID') && proj.videoId.trim() !== '';
+  const hasYouTube = cleanYtId && !cleanYtId.startsWith('YOUR_YOUTUBE_VIDEO_ID') && cleanYtId.trim() !== '';
   const isPlayable = (hasLocal || hasYouTube) && !isUpcoming;
 
   // Thumbnail background style
@@ -622,7 +636,7 @@ function _renderGallery(proj) {
     <section class="work-gallery-section" aria-label="${proj.title}">
       <div class="work-gallery-header">
         <div class="work-gallery-header__info">
-          <div class="page-chapter">Renders &amp; Stills</div>
+          <div class="page-chapter">Renders &amp; Thumbnails</div>
           <h2 class="page-title" style="font-size:clamp(1.4rem,2.5vw,2rem)">${proj.title}</h2>
           <p class="page-subtitle">${proj.description}</p>
         </div>
