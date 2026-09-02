@@ -1,0 +1,280 @@
+/* ─── SIDEBAR CONTAINER ──────────────────────────────────────────── */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-sidebar);
+  overflow: hidden;
+  transition: transform var(--t-slow), background var(--t-base), border-color var(--t-base);
+}
+
+/* RTL Sidebar positioning */
+[dir="rtl"] #sidebar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid var(--border-subtle);
+}
+
+/* Subtle vertical gradient sheen */
+#sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(89,227,255,0.025) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(89,227,255,0.015) 100%
+  );
+  pointer-events: none;
+}
+
+/* Thin accent line on edge */
+#sidebar::after {
+  content: '';
+  position: absolute;
+  top: 20%; right: 0;
+  width: 1px; height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--accent-border), transparent);
+  pointer-events: none;
+}
+
+[dir="rtl"] #sidebar::after {
+  right: auto;
+  left: 0;
+}
+
+/* ─── LOGO / WORDMARK ────────────────────────────────────────────── */
+.sidebar-logo {
+  padding: 32px 24px 22px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo__name {
+  font-family: var(--font-primary);
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: var(--accent-text-shadow);
+  line-height: 1;
+}
+
+.sidebar-logo__tagline {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+[dir="rtl"] .sidebar-logo__tagline {
+  font-family: var(--font-arabic);
+  letter-spacing: 0.5px;
+}
+
+/* Thin separator */
+.sidebar-sep {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-subtle), transparent);
+  margin: 0 16px 16px;
+  flex-shrink: 0;
+}
+
+/* ─── NAVIGATION LIST ────────────────────────────────────────────── */
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0;
+  list-style: none;
+  gap: 2px;
+}
+
+/* ─── NAVIGATION ITEM ────────────────────────────────────────────── */
+.sidebar-nav__item {
+  position: relative;
+  margin: 0 12px;
+}
+
+.sidebar-nav__btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--t-base), color var(--t-base);
+  position: relative;
+  overflow: hidden;
+}
+
+[dir="rtl"] .sidebar-nav__btn {
+  text-align: right;
+}
+
+.sidebar-nav__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-dim);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+
+.sidebar-nav__btn:hover::before { opacity: 1; }
+
+.sidebar-nav__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Chapter number */
+.sidebar-nav__num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  min-width: 20px;
+  transition: color var(--t-base);
+  position: relative;
+}
+
+/* Chapter label */
+.sidebar-nav__label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+  transition: color var(--t-base);
+  position: relative;
+}
+
+[dir="rtl"] .sidebar-nav__label {
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+/* Hover state */
+.sidebar-nav__btn:hover .sidebar-nav__num   { color: var(--accent); }
+.sidebar-nav__btn:hover .sidebar-nav__label { color: var(--text-primary); }
+
+/* ─── ACTIVE STATE ───────────────────────────────────────────────── */
+.sidebar-nav__item--active .sidebar-nav__btn::before {
+  opacity: 1;
+}
+
+/* Active side indicator */
+.sidebar-nav__item--active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 60%;
+  max-height: 34px;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+  box-shadow: 2px 0 12px var(--accent-border);
+}
+
+[dir="rtl"] .sidebar-nav__item--active::before {
+  left: auto;
+  right: 0;
+  border-radius: 2px 0 0 2px;
+  box-shadow: -2px 0 12px var(--accent-border);
+}
+
+.sidebar-nav__item--active .sidebar-nav__num   { color: var(--accent); }
+.sidebar-nav__item--active .sidebar-nav__label { color: var(--accent); font-weight: 700; }
+
+/* Active dash decoration */
+.sidebar-nav__dash {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 1px;
+  background: var(--accent-border);
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+
+[dir="rtl"] .sidebar-nav__dash {
+  right: auto;
+  left: 14px;
+}
+
+.sidebar-nav__item--active .sidebar-nav__dash { opacity: 1; }
+
+/* ─── SIDEBAR FOOTER & CONTROLS ──────────────────────────────────── */
+.sidebar-footer {
+  padding: 16px 18px 20px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-footer__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sidebar-footer__controls .ui-control-btn {
+  flex: 1;
+}
+
+.sidebar-footer__text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+}
+
+[dir="rtl"] .sidebar-footer__text {
+  font-family: var(--font-arabic);
+  letter-spacing: 0.5px;
+}
+
+.sidebar-footer__accent {
+  color: var(--accent);
+}
+
+/* ─── MOBILE DRAWER (Responsive) ─────────────────────────────────── */
+@media (max-width: 768px) {
+  #sidebar {
+    transform: translateX(-100%);
+    width: min(300px, 85vw);
+  }
+
+  [dir="rtl"] #sidebar {
+    transform: translateX(100%);
+  }
+
+  #sidebar.sidebar--open {
+    transform: translateX(0) !important;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+  }
+}

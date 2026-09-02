@@ -1,0 +1,64 @@
+/* ─── PAGE TRANSITION SYSTEM ─────────────────────────────────────
+   Pages start hidden. JS adds/removes classes to animate transitions.
+   Direction-aware: going forward slides left, going back slides right.
+────────────────────────────────────────────────────────────────── */
+
+/* Default hidden state */
+.page {
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+/* ─── ACTIVE: fully visible ──────────────────────────────────── */
+.page.page-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+  transition:
+    opacity  var(--t-page),
+    transform var(--t-page);
+}
+
+/* ─── ENTERING (from the right — going forward) ──────────────── */
+.page.page-enter-right {
+  transform: translateX(48px);
+  opacity: 0;
+}
+
+/* ─── ENTERING (from the left — going back) ──────────────────── */
+.page.page-enter-left {
+  transform: translateX(-48px);
+  opacity: 0;
+}
+
+/* ─── EXITING (to the left — was current, going forward) ─────── */
+.page.page-exit-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition:
+    opacity  var(--t-page),
+    transform var(--t-page);
+  pointer-events: none;
+}
+
+/* ─── EXITING (to the right — was current, going back) ───────── */
+.page.page-exit-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition:
+    opacity  var(--t-page),
+    transform var(--t-page);
+  pointer-events: none;
+}
+
+/* Prefers reduced motion — instant transitions */
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .page.page-active,
+  .page.page-exit-left,
+  .page.page-exit-right {
+    transition: opacity 120ms ease;
+    transform: none;
+  }
+}

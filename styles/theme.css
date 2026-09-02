@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+/*
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  NORIX PORTFOLIO — CENTRALIZED THEME & DESIGN SYSTEM             ║
+  ║  Supports: Dark Mode (Default), Light Mode, and RTL (Arabic)     ║
+  ╚══════════════════════════════════════════════════════════════════╝
+*/
+
+:root {
+   /* ═══════════════════════════════════════════════
+     ACCENT COLOR — DARK MODE (DEFAULT)
+     Bright Neon Cyan #59E3FF
+  ═══════════════════════════════════════════════ */
+   --accent: #59E3FF;
+   --accent-rgb: 89, 227, 255;
+   --accent-dim: rgba(89, 227, 255, 0.10);
+   --accent-mid: rgba(89, 227, 255, 0.25);
+   --accent-border: rgba(89, 227, 255, 0.38);
+   --accent-glow: 0 0 24px rgba(89, 227, 255, 0.22), 0 0 48px rgba(89, 227, 255, 0.10);
+   --accent-text-shadow: 0 0 20px rgba(89, 227, 255, 0.5);
+
+   /* ═══════════════════════════════════════════════
+     BACKGROUNDS — DARK MODE
+  ═══════════════════════════════════════════════ */
+   --bg-primary: #05090e;
+   --bg-secondary: #08101a;
+   --bg-tertiary: #0c1620;
+   --bg-card: rgba(255, 255, 255, 0.038);
+   --bg-card-hover: rgba(255, 255, 255, 0.065);
+   --bg-glass: rgba(8, 16, 26, 0.85);
+   --bg-sidebar: rgba(5, 9, 14, 0.97);
+
+   /* ═══════════════════════════════════════════════
+     TEXT — DARK MODE
+  ═══════════════════════════════════════════════ */
+   --text-primary: #ecf1f8;
+   --text-secondary: #6e88a0;
+   --text-muted: #3a506a;
+   --text-accent: var(--accent);
+
+   /* ═══════════════════════════════════════════════
+     BORDERS — DARK MODE
+  ═══════════════════════════════════════════════ */
+   --border-subtle: rgba(255, 255, 255, 0.05);
+   --border-card: rgba(255, 255, 255, 0.08);
+   --border-accent: var(--accent-border);
+
+   /* ═══════════════════════════════════════════════
+     LAYOUT DIMENSIONS
+  ═══════════════════════════════════════════════ */
+   --sidebar-width: 260px;
+   --page-padding: 56px 64px;
+   --page-padding-mobile: 84px 20px 36px;
+
+   /* ═══════════════════════════════════════════════
+     TYPOGRAPHY
+  ═══════════════════════════════════════════════ */
+   --font-primary: 'Outfit', system-ui, -apple-system, sans-serif;
+   --font-arabic: 'Cairo', 'Outfit', system-ui, -apple-system, sans-serif;
+   --font-mono: 'Space Mono', 'Courier New', monospace;
+
+   /* ═══════════════════════════════════════════════
+     EASING & TRANSITIONS
+  ═══════════════════════════════════════════════ */
+   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+   --t-fast: 150ms ease;
+   --t-base: 240ms ease;
+   --t-slow: 420ms var(--ease-expo);
+   --t-page: 360ms var(--ease-in-out);
+
+   /* ═══════════════════════════════════════════════
+     Z-INDEX LAYERS
+  ═══════════════════════════════════════════════ */
+   --z-page: 1;
+   --z-sidebar: 100;
+   --z-overlay: 90;
+   --z-mobile-bar: 95;
+   --z-lightbox: 200;
+   --z-menu-btn: 160;
+}
+
+/* ═════════════════════════════════════════════════
+   LIGHT THEME OVERRIDES ([data-theme="light"])
+   Crisp, modern porcelain & electric azure palette
+═════════════════════════════════════════════════ */
+[data-theme="light"] {
+   --accent: #0088cc;
+   --accent-rgb: 0, 136, 204;
+   --accent-dim: rgba(0, 136, 204, 0.08);
+   --accent-mid: rgba(0, 136, 204, 0.16);
+   --accent-border: rgba(0, 136, 204, 0.30);
+   --accent-glow: 0 4px 20px rgba(0, 136, 204, 0.18), 0 0 32px rgba(0, 136, 204, 0.08);
+   --accent-text-shadow: 0 0 16px rgba(0, 136, 204, 0.35);
+
+   --bg-primary: #f3f6fa;
+   --bg-secondary: #ffffff;
+   --bg-tertiary: #e8eff8;
+   --bg-card: rgba(255, 255, 255, 0.92);
+   --bg-card-hover: #ffffff;
+   --bg-glass: rgba(255, 255, 255, 0.88);
+   --bg-sidebar: rgba(247, 250, 254, 0.98);
+
+   --text-primary: #0f172a;
+   --text-secondary: #475569;
+   --text-muted: #64748b;
+   --text-accent: var(--accent);
+
+   --border-subtle: rgba(15, 23, 42, 0.08);
+   --border-card: rgba(15, 23, 42, 0.10);
+   --border-accent: var(--accent-border);
+}
+
+/* Ambient gradients for Light Mode */
+[data-theme="light"] body::before {
+   background:
+      radial-gradient(ellipse 70% 60% at 10% 60%, rgba(0, 136, 204, 0.05) 0%, transparent 100%),
+      radial-gradient(ellipse 50% 40% at 88% 15%, rgba(0, 136, 204, 0.04) 0%, transparent 100%),
+      radial-gradient(ellipse 80% 80% at 50% 120%, rgba(0, 136, 204, 0.03) 0%, transparent 100%);
+}
+
+[data-theme="light"] body::after {
+   background-image: radial-gradient(circle, rgba(0, 136, 204, 0.08) 1px, transparent 1px);
+   opacity: 0.5;
+}
+
+/* ═════════════════════════════════════════════════
+   RTL / ARABIC TYPOGRAPHY RULES
+═════════════════════════════════════════════════ */
+[dir="rtl"] {
+   font-family: var(--font-arabic);
+}
+
+[dir="rtl"] .about-title,
+[dir="rtl"] .page-title,
+[dir="rtl"] .page-subtitle,
+[dir="rtl"] .sidebar-nav__label,
+[dir="rtl"] .about-card__lead,
+[dir="rtl"] .about-card__paragraph,
+[dir="rtl"] .about-pillar-title,
+[dir="rtl"] .about-pillar-desc,
+[dir="rtl"] .about-quote-text,
+[dir="rtl"] .about-action-btn,
+[dir="rtl"] .work-featured__title,
+[dir="rtl"] .work-featured__desc,
+[dir="rtl"] .social-card__platform,
+[dir="rtl"] .social-card__cta {
+   font-family: var(--font-arabic);
+}

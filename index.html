@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO ══════════════════════════════════════════════════ -->
+  <title>Norix — 3D Artist &amp; Graphic Designer</title>
+  <meta name="description"
+    content="Norix — Junior 3D Artist &amp; Graphic Designer. Explore my portfolio of 3D art, animation, photography, visual design, and video production." />
+  <meta name="author" content="Norix" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ═══ Open Graph ══════════════════════════════════════════ -->
+  <meta property="og:title" content="Norix — 3D Artist &amp; Graphic Designer" />
+  <meta property="og:description"
+    content="Junior 3D Artist &amp; Graphic Designer. 3D art, animation, photography, and visual design." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://norix.dev" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Norix — 3D Artist &amp; Graphic Designer" />
+  <meta name="twitter:description" content="Portfolio of 3D art, animation, photography, and visual design." />
+  <meta name="twitter:creator" content="@itsNorix_0" />
+
+  <!-- ═══ CONFIG (loaded first — sets theme/lang before CSS) ════════
+       Edit data/config.js to change name, theme, language, colors.
+  ════════════════════════════════════════════════════════════════ -->
+  <script src="data/config.js"></script>
+  <script>
+    (function () {
+      var cfg = window.NORIX_CONFIG || {};
+      var theme = cfg.defaultTheme || 'dark';
+      var lang  = cfg.defaultLang  || 'en';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      if (cfg.accentColor) document.documentElement.style.setProperty('--accent', cfg.accentColor);
+    })();
+  </script>
+
+  <!-- Performance: font preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.youtube.com" />
+
+  <!-- ═══ STYLES ═══════════════════════════════════════════════
+       Load order: theme → layout → components → pages
+  ═══════════════════════════════════════════════════════════ -->
+  <link rel="stylesheet" href="styles/theme.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/transitions.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/lightbox.css" />
+
+  <!-- Page-specific styles -->
+  <link rel="stylesheet" href="styles/pages/about.css" />
+  <link rel="stylesheet" href="styles/pages/work.css" />
+  <link rel="stylesheet" href="styles/pages/tutorials.css" />
+  <link rel="stylesheet" href="styles/pages/talents.css" />
+  <link rel="stylesheet" href="styles/pages/social.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       APP SHELL
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="app">
+
+    <!-- Mobile Top Navigation Bar (Phone view) -->
+    <header class="mobile-topbar" id="mobile-topbar" role="banner" aria-label="Mobile Navigation Bar">
+      <div class="mobile-topbar__left">
+        <!-- Mobile hamburger button -->
+        <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <span class="mobile-topbar__logo">NORIX</span>
+      </div>
+
+      <div class="mobile-topbar__right">
+        <!-- Language Switcher Button -->
+        <button class="ui-control-btn lang-toggle-btn" aria-label="Toggle Language" title="Switch Language">
+          <span style="font-size: 13px; margin-inline-end: 2px;">🌐</span>
+          <span class="lang-btn-text">AR</span>
+        </button>
+
+        <!-- Theme Switcher Button -->
+        <button class="ui-control-btn theme-toggle-btn icon-only" aria-label="Toggle Dark/Light Mode"
+          title="Toggle Theme">
+          <span class="theme-icon-wrap">☀️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar navigation (populated by JS) -->
+    <nav id="sidebar" role="navigation" aria-label="Main navigation"></nav>
+
+    <!-- Mobile overlay (closes drawer on tap) -->
+    <div id="sidebar-overlay" role="button" aria-label="Close navigation menu" tabindex="0"></div>
+
+    <!-- Pages are injected here by the router -->
+    <main id="page-container"></main>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LIGHTBOX (photo viewer)
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Full-screen image viewer">
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close image viewer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <button class="lightbox__prev" id="lightbox-prev" aria-label="Previous image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="lightbox__next" id="lightbox-next" aria-label="Next image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox__content">
+      <img id="lightbox-img" src="" alt="" />
+      <div class="lightbox__caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DATA FILES (config.js loaded in head — load rest here)
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="data/navigation.js"></script>
+  <script src="data/about.js"></script>
+  <script src="data/projects.js"></script>
+  <script src="data/tutorials.js"></script>
+  <script src="data/skills.js"></script>
+  <script src="data/social.js"></script>
+  <script src="data/translations.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CORE CONTROLLERS & COMPONENTS
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="scripts/i18n.js"></script>
+  <script src="scripts/components/sidebar.js"></script>
+  <script src="scripts/components/lightbox.js"></script>
+  <script src="scripts/components/skillBar.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE RENDERERS
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="scripts/pages/about.js"></script>
+  <script src="scripts/pages/work.js"></script>
+  <script src="scripts/pages/tutorials.js"></script>
+  <script src="scripts/pages/talents.js"></script>
+  <script src="scripts/pages/social.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       APP BOOTSTRAP
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="scripts/cloud-sync.js"></script>
+  <script src="scripts/router.js"></script>
+  <script src="scripts/main.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SITE PROTECTION & OWNER CONSOLE
+       protect.js — disables right-click, copy watermark, Ctrl+U
+       owner.js   — secret admin panel (NORIX_OWNER.help() in console)
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="scripts/protect.js"></script>
+  <script src="scripts/owner.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 04 — TALENTS
+   Supports: Dark Mode (Default), Light Mode, RTL (Arabic)
+═══════════════════════════════════════════════════════════════ */
+
+#page-talents {
+  padding: var(--page-padding);
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────────────── */
+.talents-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+/* ─── LEFT: intro copy ────────────────────────────────────────── */
+.talents-intro__quote {
+  margin-top: 28px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding-left: 20px;
+  border-left: 2px solid var(--accent-border);
+}
+
+[dir="rtl"] .talents-intro__quote {
+  padding-left: 0;
+  padding-right: 20px;
+  border-left: none;
+  border-right: 2px solid var(--accent-border);
+}
+
+.talents-intro__body {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.talents-intro__note {
+  margin-top: 28px;
+  padding: 16px 18px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+[dir="rtl"] .talents-intro__note {
+  font-family: var(--font-arabic);
+}
+
+/* ─── RIGHT: skill bars ───────────────────────────────────────── */
+.talents-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Individual skill item */
+.skill-item {
+  position: relative;
+}
+
+.skill-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.skill-item__name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+[dir="rtl"] .skill-item__name {
+  letter-spacing: 0;
+}
+
+.skill-item__icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.skill-item__meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-top: 2px;
+  margin-left: 28px;
+  display: block;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+[dir="rtl"] .skill-item__meta {
+  margin-left: 0;
+  margin-right: 28px;
+  font-family: var(--font-arabic);
+}
+
+/* Percentage display */
+.skill-item__percent {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -1px;
+  min-width: 42px;
+  text-align: right;
+  transition: opacity 0.2s;
+}
+
+[dir="rtl"] .skill-item__percent {
+  text-align: left;
+}
+
+/* Track + bar */
+.skill-item__track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: visible;
+  position: relative;
+}
+
+[data-theme="light"] .skill-item__track {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+/* The fill bar */
+.skill-item__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) 0%, rgba(89, 227, 255, 0.65) 100%);
+  position: relative;
+  transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 0 10px rgba(89, 227, 255, 0.35);
+}
+
+[data-theme="light"] .skill-item__fill {
+  background: linear-gradient(to right, var(--accent) 0%, rgba(0, 136, 204, 0.65) 100%);
+  box-shadow: 0 0 8px rgba(0, 136, 204, 0.25);
+}
+
+[dir="rtl"] .skill-item__fill {
+  left: auto;
+  right: 0;
+  background: linear-gradient(to left, var(--accent) 0%, rgba(89, 227, 255, 0.65) 100%);
+}
+
+[dir="rtl"][data-theme="light"] .skill-item__fill {
+  background: linear-gradient(to left, var(--accent) 0%, rgba(0, 136, 204, 0.65) 100%);
+}
+
+/* Glowing tip */
+.skill-item__fill::after {
+  content: '';
+  position: absolute;
+  right: -2px; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(89, 227, 255, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s 0.8s;
+}
+
+[dir="rtl"] .skill-item__fill::after {
+  right: auto;
+  left: -2px;
+}
+
+.skill-item.animated .skill-item__fill::after {
+  opacity: 1;
+}
+
+/* Tick marks */
+.skill-item__ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.skill-item__tick {
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .skill-item__tick {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+/* ─── SKILLS SUMMARY GRID ─────────────────────────────────────── */
+.talents-summary {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.talents-summary__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+[dir="rtl"] .talents-summary__label {
+  font-family: var(--font-arabic);
+  letter-spacing: 0.5px;
+}
+
+.talents-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.talents-summary__item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+}
+
+.talents-summary__item:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.talents-summary__item-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.talents-summary__item-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.talents-summary__item-level {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .talents-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-talents { padding: var(--page-padding-mobile); }
+}
