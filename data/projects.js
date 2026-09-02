@@ -75,6 +75,24 @@ window.NORIX_DATA.projects = [
     ],
   },
 
+    // ── PROJECT 4: YOUTUBE VIDEO (Murder Drones Fan-Made) ─────────
+  {
+    id:          'murder-drones',
+    type:        'video-youtube',
+    featured:    true,
+    title:       'Murder Drones Season 2 — Fan Made',
+    category:    '3D Animation',
+    year:        '2026',
+    description: 'A fan-made animated sequence inspired by the Murder Drones series. Built in Blender with custom character rigging, expressive lighting, and dynamic camera work.',
+    tags:        ['Blender', '3D Animation', 'Fan Art', 'Cinematic'],
+
+    videoId:     'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
+    thumbnail:   '',      // OPTIONAL: custom thumbnail override
+
+    releaseIn:   false,
+    releaseDate: '22/8/2026',
+  },
+  
   // ── ADD MORE PROJECTS BELOW ────────────────────────────────────
   //
   // LOCAL VIDEO TEMPLATE:
