@@ -53,7 +53,7 @@ window.NORIX_DATA.projects = [
     videoId: 'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
     thumbnail: '',      // OPTIONAL: custom thumbnail override
 
-    releaseIn: false,
+    releaseIn: true,
     releaseDate: '22/8/2026',
   },
 
