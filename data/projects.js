@@ -30,7 +30,7 @@ window.NORIX_DATA.projects = [
     category: '3D Animation & SFX',
     year: '2026',
     description: 'A cinematic showcase crafted with dramatic lighting, custom 3D environments, particle simulations, and atmospheric sound design.',
-    tags: ['Work', 'SFX', 'Cinematic'],
+    tags: ['Blender', 'SFX', 'Cinematic'],
 
     videoId: 'oslf-Icz8RM',
     thumbnail: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
@@ -43,8 +43,8 @@ window.NORIX_DATA.projects = [
   {
     id: 'murder-drones',
     type: 'video-youtube',
-    featured: true,
-    title: 'Murder Drones Season 2 — Fan Made',
+    featured: false,
+    title: 'Murder Drones Season 2 Trailer — Fan Made',
     category: '3D Animation',
     year: '2026',
     description: 'A fan-made animated sequence inspired by the Murder Drones series. Built in Blender with custom character rigging, expressive lighting, and dynamic camera work.',
@@ -53,19 +53,19 @@ window.NORIX_DATA.projects = [
     videoId: 'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
     thumbnail: '',      // OPTIONAL: custom thumbnail override
 
-    releaseIn: true,
-    releaseDate: '22/8/2026',
+    releaseIn: false,
+    releaseDate: '22/9/2026',
   },
 
   // ── PROJECT 3: PHOTO GALLERY ───────────────────────────────────
   {
-    id: 'photography',
+    id: 'photos',
     type: 'gallery',
     featured: false,
-    title: 'Render Gallery & Photography',
-    category: '3D Renders & Photography',
-    year: '2025',
-    description: 'A collection of renders and photographs capturing light, texture, and character composition.',
+    title: 'Renders',
+    category: '3D Renders & Thumbnails',
+    year: '2026',
+    description: 'A collection of renders and Thumbnails capturing light, texture, and character composition.',
     tags: ['3D Art', 'Lighting', 'Visual Design'],
 
     photos: [

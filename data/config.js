@@ -45,7 +45,7 @@ window.NORIX_CONFIG = {
 
   /* ────────────────────────────────────────────────────────────────────
      SITE PROTECTION
-     true  = enable (disables right-click, copy watermark, blocks Ctrl+U)
+     true  = enable (blocks F12, DevTools, right-click, Ctrl+U, copy watermark)
      false = disable (useful during local development)
   ──────────────────────────────────────────────────────────────────── */
   protection: true,                             /* ← true or false        */

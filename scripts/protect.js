@@ -2,16 +2,16 @@
   ╔══════════════════════════════════════════════════════════════════╗
   ║  SITE PROTECTION — scripts/protect.js                          ║
   ║                                                                ║
-  ║  Adds basic content protection to the portfolio:               ║
-  ║    • Disables right-click context menu                         ║
-  ║    • Disables image dragging                                    ║
-  ║    • Disables text selection on non-content areas              ║
-  ║    • Disables Ctrl+U (view source), Ctrl+S (save page)        ║
-  ║    • Disables Ctrl+Shift+I, Ctrl+Shift+J (DevTools shortcuts) ║
+  ║  Adds content protection to the portfolio:                     ║
+  ║    • Disables F12 & Developer Tools shortcuts                  ║
+  ║    • Disables right-click context menu (Inspect)              ║
+  ║    • Disables image dragging                                   ║
+  ║    • Disables text selection on media/images                   ║
+  ║    • Disables Ctrl+U (view source), Ctrl+S (save page)         ║
+  ║    • Disables Ctrl+Shift+I/J/C/K (DevTools & Console)          ║
   ║                                                                ║
-  ║  NOTE: This is content deterrence, not absolute protection.    ║
-  ║  Determined users can still view source via browser address    ║
-  ║  bar. This stops casual theft/copying.                        ║
+  ║  To disable during development, set in data/config.js:         ║
+  ║    protection: false                                           ║
   ╚══════════════════════════════════════════════════════════════════╝
 */
 
@@ -45,24 +45,46 @@
 
   /* ────────────────────────────────────────────────────────────────
      KEYBOARD SHORTCUT BLOCK
-     Blocks: Ctrl+U, Ctrl+S, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+     Blocks: F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+Shift+K,
+             Ctrl+U (view-source), Ctrl+S (save page)
   ──────────────────────────────────────────────────────────────── */
   document.addEventListener('keydown', function (e) {
     if (!isEnabled()) return;
 
-    const ctrl = e.ctrlKey || e.metaKey;
-    const key  = e.key.toLowerCase();
+    const ctrl  = e.ctrlKey || e.metaKey;
+    const shift = e.shiftKey;
+    const key   = (e.key || '').toLowerCase();
+    const code  = e.keyCode || e.which;
 
-    // Ctrl+U — view-source (blocks casual source viewing)
-    if (ctrl && key === 'u') { e.preventDefault(); return; }
+    // F12 — DevTools
+    if (key === 'f12' || code === 123) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
 
-    // Ctrl+S — save page (blocks saving HTML locally)
-    if (ctrl && key === 's') { e.preventDefault(); return; }
+    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C / Ctrl+Shift+K — DevTools & Inspector
+    if (ctrl && shift && (key === 'i' || key === 'j' || key === 'c' || key === 'k' || key === 'e' || code === 73 || code === 74 || code === 67 || code === 75 || code === 69)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
 
-    // NOTE: F12, Ctrl+Shift+I/J/C (DevTools) are NOT blocked
-    // so the Owner Console can always be accessed.
+    // Ctrl+U — View Source
+    if (ctrl && (key === 'u' || code === 85)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
 
-  }, false);
+    // Ctrl+S — Save Page
+    if (ctrl && (key === 's' || code === 83)) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
+  }, true);
 
   /* ────────────────────────────────────────────────────────────────
      SELECT DISABLE on media/images (not on text content)
