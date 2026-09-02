@@ -63,6 +63,7 @@ window.NORIX_I18N = (function () {
     "shots": "لقطات",
     "videos": "فيديوهات",
     "Overview": "نظرة عامة",
+     "Work": "عمل",
   };
 
   function init() {
