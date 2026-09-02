@@ -487,7 +487,7 @@ function _mountYouTubeIframePlayer(wrap, videoId, thumbUrl, projTitle) {
     <div class="yt-player-container yt-player-iframe-mode" tabindex="0">
       <iframe
         class="yt-iframe-embed"
-        src="https://www.youtube.com/embed/${cleanId}?autoplay=1&rel=0&enablejsapi=1"
+        src="https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=1&playsinline=1&rel=0"
         title="${projTitle || 'YouTube video player'}"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -32,7 +32,7 @@ window.NORIX_DATA.projects = [
     description: 'A cinematic showcase crafted with dramatic lighting, custom 3D environments, particle simulations, and atmospheric sound design.',
     tags: ['Blender', 'SFX', 'Cinematic'],
 
-    videoId: 'oslf-Icz8RM',
+    videoId: 'https://www.youtube.com/watch?v=oslf-Icz8RM',
     thumbnail: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
 
     releaseIn: false,   // true = show "Coming in [date]" instead of playing
