@@ -24,15 +24,15 @@ window.NORIX_DATA.projects = [
   // ── PROJECT 1: LOCAL VIDEO (Lights Craft Trailer) ─────────────
   {
     id:          'lights-craft',      // REQUIRED — unique slug (no spaces)
-    type:        'video-local',       // REQUIRED — 'video-local' | 'video-youtube' | 'gallery'
+    type:        'video-youtube',       // REQUIRED — 'video-local' | 'video-youtube' | 'gallery'
     featured:    true,
     title:       'Lights Craft — Cinematic Trailer',
-    category:    '3D Animation & VFX',
+    category:    '3D Animation & SFX',
     year:        '2026',
     description: 'A cinematic showcase crafted with dramatic lighting, custom 3D environments, particle simulations, and atmospheric sound design.',
-    tags:        ['Blender', '3D Animation', 'VFX', 'Cinematic'],
+    tags:        ['Blender', 'SFX', 'Cinematic'],
 
-    videoFile:   'assets/videos/Lights-Craft-Traller.mp4',  // path inside assets/videos/
+    videoid:   'oslf-Icz8RM'
     thumbnail:   'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
 
     releaseIn:   false,   // true = show "Coming in [date]" instead of playing
@@ -73,24 +73,6 @@ window.NORIX_DATA.projects = [
       { src: 'assets/images/Huggy-Photo.png',                    alt: 'Huggy 3D Model',       caption: 'Huggy — Character Scene' },
       { src: 'assets/images/Pomni-Stand.png',                    alt: 'Pomni Stand',           caption: 'Pomni Stand — 3D Render' },
     ],
-  },
-
-    // ── PROJECT 4: YOUTUBE VIDEO (Murder Drones Fan-Made) ─────────
-  {
-    id:          'murder-drones',
-    type:        'video-youtube',
-    featured:    true,
-    title:       'Murder Drones Season 2 — Fan Made',
-    category:    '3D Animation',
-    year:        '2026',
-    description: 'A fan-made animated sequence inspired by the Murder Drones series. Built in Blender with custom character rigging, expressive lighting, and dynamic camera work.',
-    tags:        ['Work', '3D Animation', 'Fan Art', 'Cinematic'],
-
-    videoId:     'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
-    thumbnail:   '',      // OPTIONAL: custom thumbnail override
-
-    releaseIn:   false,
-    releaseDate: '22/8/2026',
   },
   
   // ── ADD MORE PROJECTS BELOW ────────────────────────────────────
