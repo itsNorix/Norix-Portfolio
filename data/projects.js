@@ -30,7 +30,7 @@ window.NORIX_DATA.projects = [
     category:    '3D Animation & SFX',
     year:        '2026',
     description: 'A cinematic showcase crafted with dramatic lighting, custom 3D environments, particle simulations, and atmospheric sound design.',
-    tags:        ['Blender', 'SFX', 'Cinematic'],
+    tags:        ['Work', 'SFX', 'Cinematic'],
 
     videoId:   'oslf-Icz8RM' ,
     thumbnail:   'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
