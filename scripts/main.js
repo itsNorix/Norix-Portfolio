@@ -7,7 +7,7 @@
 
   function boot() {
     // 1. Initialize Theme controller
-    const themeCtrl = window.NORIX_THEME || window.NORIX_I18N;
+    const themeCtrl = window.NORIX_THEME;
     if (themeCtrl) {
       themeCtrl.init();
     }

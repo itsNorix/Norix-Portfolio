@@ -81,6 +81,3 @@ window.NORIX_THEME = (function () {
     moonIcon: _moonIcon,
   };
 }());
-
-/* Compatibility alias if referenced */
-window.NORIX_I18N = window.NORIX_THEME;

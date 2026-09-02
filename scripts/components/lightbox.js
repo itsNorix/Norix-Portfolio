@@ -48,12 +48,14 @@ window.NORIX_LIGHTBOX = (function () {
 
   function open(photos, startIndex = 0) {
     if (!el.box) _init();
-    _photos  = photos;
+    _photos  = photos || [];
     _current = startIndex;
     _show();
-    el.box.classList.add('lightbox--open');
-    document.body.style.overflow = 'hidden';
-    el.close.focus();
+    if (el.box) {
+      el.box.classList.add('lightbox--open');
+      document.body.style.overflow = 'hidden';
+      if (el.close) el.close.focus();
+    }
   }
 
   function close() {

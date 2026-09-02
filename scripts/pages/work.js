@@ -40,7 +40,8 @@ window.NORIX_PAGES.work = {
 
   init(pageEl) {
     // 1. Attach lightbox to gallery items
-    const galleryProject = window.NORIX_DATA.projects.find(p => p.type === 'gallery');
+    const projects = window.NORIX_DATA.projects || [];
+    const galleryProject = projects.find(p => p.type === 'gallery');
 
     if (galleryProject && galleryProject.photos) {
       const photos = galleryProject.photos;
@@ -420,7 +421,6 @@ function _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat)
       e.preventDefault();
       if (video.duration) {
         video.currentTime = Math.max(0, video.currentTime - 5);
-        triggerRipple(false);
       }
     }
     // Arrow Right: Seek forward 5 seconds
@@ -428,7 +428,6 @@ function _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat)
       e.preventDefault();
       if (video.duration) {
         video.currentTime = Math.min(video.duration, video.currentTime + 5);
-        triggerRipple(true);
       }
     }
     // Arrow Up: Volume Up 5%

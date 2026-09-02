@@ -15,7 +15,8 @@ window.NORIX_PAGES.about = {
 
     const bioParagraphs = d.bio || [];
     const nameToHighlight = d.name || 'Norix';
-    const regex = new RegExp(`\\b${nameToHighlight}\\b`, 'g');
+    const escapedName = nameToHighlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`\\b${escapedName}\\b`, 'g');
     
     const leadText = bioParagraphs[0]
       ? bioParagraphs[0].replace(regex, `<span class="about-text-glow">${nameToHighlight}</span>`)

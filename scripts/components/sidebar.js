@@ -20,7 +20,7 @@ window.NORIX_SIDEBAR = (function () {
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
 
-    const themeCtrl = window.NORIX_THEME || window.NORIX_I18N;
+    const themeCtrl = window.NORIX_THEME;
     const cfg  = window.NORIX_CONFIG || {};
     const feat = cfg.features || {};
 

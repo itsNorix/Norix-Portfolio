@@ -71,7 +71,7 @@
     if (!isEnabled()) return;
     const tag = e.target.tagName;
     // Allow selection in inputs/textareas/content text, block on images & decorative
-    if (tag === 'IMG' || tag === 'VIDEO' || e.target.classList.contains('work-gallery__item')) {
+    if (tag === 'IMG' || tag === 'VIDEO' || (e.target.classList && e.target.classList.contains('work-gallery__item'))) {
       e.preventDefault();
     }
   }, false);
