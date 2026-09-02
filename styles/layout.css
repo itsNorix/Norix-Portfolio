@@ -320,8 +320,19 @@ body::after {
   #page-container {
     margin-left: 0 !important;
     margin-right: 0 !important;
+    /* Allow the container itself to scroll on mobile so stacked pages
+       (e.g. About with two vertical sections) are not clipped. */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 60px; /* offset for the fixed mobile topbar */
   }
   .page {
+    /* On mobile, pages are no longer absolutely positioned within a fixed-height
+       container — they flow naturally and the container scrolls. */
+    position: relative;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
     padding: var(--page-padding-mobile);
   }
   .mobile-topbar {

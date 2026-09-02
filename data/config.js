@@ -3,8 +3,8 @@
   ║                                                                      ║
   ║   MASTER CONFIG — data/config.js                                     ║
   ║                                                                      ║
-  ║  This is the ONLY file you need to edit to customize your           ║
-  ║  portfolio. Change your name, colors, SEO, and features here.       ║
+  ║  This is the main config file for your portfolio.                   ║
+  ║  Change your name, colors, SEO, theme, and features here.           ║
   ║                                                                      ║
   ║  Changes take effect on the next page refresh.                      ║
   ╚══════════════════════════════════════════════════════════════════════╝
@@ -34,13 +34,6 @@ window.NORIX_CONFIG = {
   defaultTheme: 'dark',                         /* ← 'dark' or 'light'    */
 
   /* ────────────────────────────────────────────────────────────────────
-     LANGUAGE
-     'en' = English (LTR)
-     'ar' = Arabic (RTL)
-  ──────────────────────────────────────────────────────────────────── */
-  defaultLang: 'en',                            /* ← 'en' or 'ar'         */
-
-  /* ────────────────────────────────────────────────────────────────────
      ACCENT COLOR OVERRIDE (Optional)
      null          = use theme.css defaults (recommended)
      '#59E3FF'     = neon cyan (dark mode default)
@@ -61,10 +54,15 @@ window.NORIX_CONFIG = {
      FEATURE FLAGS
   ──────────────────────────────────────────────────────────────────── */
   features: {
-    showWork:      true,
-    showTutorials: true,
-    showTalents:   true,
-    showSocial:    true,
+    showWork:        true,
+    showTutorials:   true,
+    showTalents:     true,
+    showSocial:      true,
+
+    /* ─ UI Controls ─────────────────────────────────────────────
+       showThemeToggle: show the dark/light mode toggle button
+    ──────────────────────────────────────────────────────────── */
+    showThemeToggle: true,            /* ← true or false         */
   },
 
   /* ────────────────────────────────────────────────────────────────────
@@ -73,27 +71,6 @@ window.NORIX_CONFIG = {
   player: {
     idleHideMs:     1000,  /* ms of mouse inactivity before bar hides     */
     autoplayOnOpen: false, /* auto-play when a project card opens         */
-  },
-
-  /* ────────────────────────────────────────────────────────────────────
-     REMOTE SYNC — Updates all visitors when you save from the Owner Panel
-     ──────────────────────────────────────────────────────────────────
-     SETUP (takes 3 minutes, completely free):
-       1. Go to https://firebase.google.com and sign in with Google
-       2. Click "Go to Console" → "Add Project" → name it anything → Create
-       3. In the left sidebar: Build → Realtime Database → Create Database
-       4. Choose any location → Start in TEST MODE → Enable
-       5. Copy the URL shown (looks like: https://my-project-default-rtdb.firebaseio.com)
-       6. Paste it below as firebaseUrl
-       7. Set enabled: true
-     ──────────────────────────────────────────────────────────────────
-     Once set up: every time you Save in the Owner Panel, ALL visitors
-     worldwide will see your changes on their next page load.
-  ──────────────────────────────────────────────────────────────────── */
-  remoteSync: {
-    enabled:     false,  /* ← Set to true after completing setup above    */
-    firebaseUrl: '',     /* ← Paste your Firebase Realtime Database URL   */
-                         /*   e.g. 'https://my-project-rtdb.firebaseio.com' */
   },
 
 };

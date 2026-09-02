@@ -678,10 +678,10 @@
 @media (max-width: 900px) {
   #page-about {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto;
     height: auto;
-    min-height: 100%;
-    overflow-y: auto;
+    min-height: auto;
+    overflow: visible;
   }
 
   .about-hero {
@@ -700,11 +700,14 @@
   .about-bio {
     padding: 28px 20px 48px;
     height: auto;
+    min-height: auto;
+    overflow: visible;
   }
 
   .about-card {
     padding: 28px 20px;
     border-radius: 20px;
+    min-height: auto;
   }
 }
 

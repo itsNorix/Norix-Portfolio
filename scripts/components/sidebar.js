@@ -20,21 +20,36 @@ window.NORIX_SIDEBAR = (function () {
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
 
-    const i18n = window.NORIX_I18N;
-    const currentLang  = i18n ? i18n.getLang() : 'en';
-    const currentTheme = i18n ? i18n.getTheme() : 'dark';
-    const uiData       = i18n ? i18n.t('ui') : {};
-    const navItems     = (i18n && i18n.t('navigation')) || window.NORIX_DATA.navigation || [];
+    const themeCtrl = window.NORIX_THEME || window.NORIX_I18N;
+    const cfg  = window.NORIX_CONFIG || {};
+    const feat = cfg.features || {};
 
-    const langBtnText  = currentLang === 'en' ? 'AR' : 'EN';
-    const langBtnTitle = currentLang === 'en' ? 'التبديل إلى العربية' : 'Switch to English';
-    const themeIcon    = currentTheme === 'dark' ? (i18n ? i18n.sunIcon() : '☀️') : (i18n ? i18n.moonIcon() : '🌙');
-    const themeBtnTitle= currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    const showTheme = feat.showThemeToggle !== false;
+    const currentTheme = themeCtrl ? themeCtrl.getTheme() : 'dark';
+    const navItems     = window.NORIX_DATA.navigation || [];
+
+    const themeIcon     = currentTheme === 'dark' ? (themeCtrl ? themeCtrl.sunIcon() : '☀️') : (themeCtrl ? themeCtrl.moonIcon() : '🌙');
+    const themeBtnTitle = currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+
+    // Build controls HTML based on whether theme toggle is enabled
+    let controlsHTML = '';
+    if (showTheme) {
+      controlsHTML = `
+        <div class="sidebar-footer__controls single-control">
+          <button
+            class="ui-control-btn theme-toggle-btn icon-only"
+            aria-label="${themeBtnTitle}"
+            title="${themeBtnTitle}"
+          >
+            <span class="theme-icon-wrap">${themeIcon}</span>
+          </button>
+        </div>`;
+    }
 
     sidebar.innerHTML = `
       <div class="sidebar-logo" role="banner">
         <div class="sidebar-logo__name">NORIX</div>
-        <div class="sidebar-logo__tagline">${uiData.tagline || '3D Artist · Designer'}</div>
+        <div class="sidebar-logo__tagline">3D Artist · Designer</div>
       </div>
 
       <div class="sidebar-sep" aria-hidden="true"></div>
@@ -44,27 +59,10 @@ window.NORIX_SIDEBAR = (function () {
       </ul>
 
       <div class="sidebar-footer">
-        <div class="sidebar-footer__controls">
-          <button
-            class="ui-control-btn lang-toggle-btn"
-            aria-label="${langBtnTitle}"
-            title="${langBtnTitle}"
-          >
-            <span style="font-size:13px; margin-inline-end: 2px;">🌐</span>
-            <span class="lang-btn-text">${langBtnText}</span>
-          </button>
-
-          <button
-            class="ui-control-btn theme-toggle-btn icon-only"
-            aria-label="${themeBtnTitle}"
-            title="${themeBtnTitle}"
-          >
-            <span class="theme-icon-wrap">${themeIcon}</span>
-          </button>
-        </div>
+        ${controlsHTML}
 
         <div class="sidebar-footer__text" aria-hidden="true">
-          ${uiData.copyright || 'Portfolio · © Norix 2026'}
+          Portfolio · © Norix 2026
         </div>
       </div>
     `;
@@ -86,15 +84,10 @@ window.NORIX_SIDEBAR = (function () {
       });
     });
 
-    // Attach footer controls
-    const langBtn = sidebar.querySelector('.lang-toggle-btn');
-    if (langBtn && i18n) {
-      langBtn.addEventListener('click', () => i18n.toggleLang());
-    }
-
+    // Attach theme toggle
     const themeBtn = sidebar.querySelector('.theme-toggle-btn');
-    if (themeBtn && i18n) {
-      themeBtn.addEventListener('click', () => i18n.toggleTheme());
+    if (themeBtn && themeCtrl) {
+      themeBtn.addEventListener('click', () => themeCtrl.toggleTheme());
     }
   }
 

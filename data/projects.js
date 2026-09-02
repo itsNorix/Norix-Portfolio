@@ -23,55 +23,55 @@ window.NORIX_DATA.projects = [
 
   // ── PROJECT 1: LOCAL VIDEO (Lights Craft Trailer) ─────────────
   {
-    id:          'lights-craft',      // REQUIRED — unique slug (no spaces)
-    type:        'video-local',       // REQUIRED — 'video-local' | 'video-youtube' | 'gallery'
-    featured:    true,
-    title:       'Lights Craft — Cinematic Trailer',
-    category:    '3D Animation & VFX',
-    year:        '2026',
+    id: 'lights-craft',      // REQUIRED — unique slug (no spaces)
+    type: 'video-youtube',       // REQUIRED — 'video-local' | 'video-youtube' | 'gallery'
+    featured: true,
+    title: 'Lights Craft — Cinematic Trailer',
+    category: '3D Animation & SFX',
+    year: '2026',
     description: 'A cinematic showcase crafted with dramatic lighting, custom 3D environments, particle simulations, and atmospheric sound design.',
-    tags:        ['Blender', '3D Animation', 'VFX', 'Cinematic'],
+    tags: ['Work', 'SFX', 'Cinematic'],
 
-    videoFile:   'assets/videos/Lights-Craft-Traller.mp4',  // path inside assets/videos/
-    thumbnail:   'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
+    videoId: 'oslf-Icz8RM',
+    thumbnail: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', // OPTIONAL
 
-    releaseIn:   false,   // true = show "Coming in [date]" instead of playing
+    releaseIn: false,   // true = show "Coming in [date]" instead of playing
     releaseDate: '',      // e.g. '22/8/2026' — only used when releaseIn: true
   },
 
   // ── PROJECT 2: YOUTUBE VIDEO (Murder Drones Fan-Made) ─────────
   {
-    id:          'murder-drones',
-    type:        'video-youtube',
-    featured:    true,
-    title:       'Murder Drones Season 2 — Fan Made',
-    category:    '3D Animation',
-    year:        '2026',
+    id: 'murder-drones',
+    type: 'video-youtube',
+    featured: true,
+    title: 'Murder Drones Season 2 — Fan Made',
+    category: '3D Animation',
+    year: '2026',
     description: 'A fan-made animated sequence inspired by the Murder Drones series. Built in Blender with custom character rigging, expressive lighting, and dynamic camera work.',
-    tags:        ['Blender', '3D Animation', 'Fan Art', 'Cinematic'],
+    tags: ['Blender', '3D Animation', 'Fan Art', 'Cinematic'],
 
-    videoId:     'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
-    thumbnail:   '',      // OPTIONAL: custom thumbnail override
+    videoId: 'YOUR_YOUTUBE_VIDEO_ID_HERE', // paste the YouTube video ID here
+    thumbnail: '',      // OPTIONAL: custom thumbnail override
 
-    releaseIn:   false,
+    releaseIn: false,
     releaseDate: '22/8/2026',
   },
 
   // ── PROJECT 3: PHOTO GALLERY ───────────────────────────────────
   {
-    id:          'photography',
-    type:        'gallery',
-    featured:    false,
-    title:       'Render Gallery & Photography',
-    category:    '3D Renders & Photography',
-    year:        '2025',
+    id: 'photography',
+    type: 'gallery',
+    featured: false,
+    title: 'Render Gallery & Photography',
+    category: '3D Renders & Photography',
+    year: '2025',
     description: 'A collection of renders and photographs capturing light, texture, and character composition.',
-    tags:        ['3D Art', 'Lighting', 'Visual Design'],
+    tags: ['3D Art', 'Lighting', 'Visual Design'],
 
     photos: [
-      { src: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', alt: 'Lights Craft Scene',  caption: 'Lights Craft — Atmospheric Environment' },
-      { src: 'assets/images/Huggy-Photo.png',                    alt: 'Huggy 3D Model',       caption: 'Huggy — Character Scene' },
-      { src: 'assets/images/Pomni-Stand.png',                    alt: 'Pomni Stand',           caption: 'Pomni Stand — 3D Render' },
+      { src: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', alt: 'Lights Craft Scene', caption: 'Lights Craft — Atmospheric Environment' },
+      { src: 'assets/images/Huggy-Photo.png', alt: 'Huggy 3D Model', caption: 'Huggy — Character Scene' },
+      { src: 'assets/images/Pomni-Stand.png', alt: 'Pomni Stand', caption: 'Pomni Stand — 3D Render' },
     ],
   },
 

@@ -8,38 +8,25 @@ window.NORIX_PAGES = window.NORIX_PAGES || {};
 window.NORIX_PAGES.work = {
 
   render() {
-    const i18n = window.NORIX_I18N;
-    const workData = (i18n && i18n.t('work')) || {};
-    const uiData = (i18n && i18n.t('ui')) || {};
     const projects = window.NORIX_DATA.projects || [];
 
     // Separate featured videos from gallery
     const featuredProjects = projects.filter(p => p.type === 'video-youtube' || p.type === 'video-local' || p.videoFile || p.videoId || p.releaseIn || p.releaseDate);
     const galleryProject = projects.find(p => p.type === 'gallery');
 
-    const isArabic = i18n && i18n.getLang() === 'ar';
-
     const featuredHTML = featuredProjects.map((proj, i) => {
       const isReverse = i % 2 !== 0;
-      const localizedProj = (workData.projects && workData.projects[proj.id]) || {};
-      const merged = {
-        ...proj,
-        title: localizedProj.title || proj.title,
-        category: localizedProj.category || proj.category,
-        description: localizedProj.description || proj.description,
-        tags: localizedProj.tags || proj.tags,
-      };
-      return _renderFeatured(merged, isReverse, uiData, isArabic);
+      return _renderFeatured(proj, isReverse);
     }).join('');
 
-    const galleryHTML = galleryProject ? _renderGallery(galleryProject, workData, uiData) : '';
+    const galleryHTML = galleryProject ? _renderGallery(galleryProject) : '';
 
     return `
       <div id="page-work">
         <header class="work-header page-header">
-          <div class="page-chapter">${workData.chapter || '02 — Chapter'}</div>
-          <h1 class="page-title">${workData.title || 'My Work'}</h1>
-          <p class="page-subtitle">${workData.subtitle || 'Featured 3D animations, cinematic trailers, visual effects, and renders.'}</p>
+          <div class="page-chapter">02 — Chapter</div>
+          <h1 class="page-title">My Work</h1>
+          <p class="page-subtitle">Featured 3D animations, cinematic trailers, visual effects, and renders.</p>
         </header>
 
         <section aria-label="Featured video projects">
@@ -53,20 +40,14 @@ window.NORIX_PAGES.work = {
 
   init(pageEl) {
     // 1. Attach lightbox to gallery items
-    const i18n = window.NORIX_I18N;
-    const workData = (i18n && i18n.t('work')) || {};
     const galleryProject = window.NORIX_DATA.projects.find(p => p.type === 'gallery');
 
     if (galleryProject && galleryProject.photos) {
-      const localizedCaptions = workData.galleryCaptions || [];
-      const localizedPhotos = galleryProject.photos.map((p, idx) => ({
-        ...p,
-        caption: localizedCaptions[idx] || p.caption,
-      }));
+      const photos = galleryProject.photos;
 
       const items = pageEl.querySelectorAll('.work-gallery__item');
       items.forEach((item, i) => {
-        const handler = () => window.NORIX_LIGHTBOX.open(localizedPhotos, i);
+        const handler = () => window.NORIX_LIGHTBOX.open(photos, i);
         item.addEventListener('click', handler);
         item.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -90,19 +71,12 @@ window.NORIX_PAGES.work = {
         if (wrap.querySelector('.yt-player-container') || wrap.querySelector('iframe')) return;
 
         const projTitle = wrap.dataset.title || '';
-        const projCat = wrap.dataset.category || '';
+        const projCat   = wrap.dataset.category || '';
 
         if (hasLocal) {
           _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat);
         } else if (hasYouTube) {
-          wrap.innerHTML = `
-            <iframe
-              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
-              title="${projTitle || 'YouTube video player'}"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          `;
+          _mountYouTubeIframePlayer(wrap, videoId, thumbUrl, projTitle);
         }
       };
 
@@ -491,6 +465,27 @@ function _mountYouTubeStylePlayer(wrap, videoFile, thumbUrl, projTitle, projCat)
   video.play().catch(() => { });
 }
 
+/* ─── YOUTUBE IFRAME STYLED PLAYER ───────────────────────────────
+   Embeds a YouTube iframe inside the same visual shell as the local
+   video player — same dark container, backdrop, and border styling.
+   YouTube's native controls handle playback inside the frame.
+────────────────────────────────────────────────────────────────── */
+
+function _mountYouTubeIframePlayer(wrap, videoId, thumbUrl, projTitle) {
+  wrap.innerHTML = `
+    <div class="yt-player-container yt-player-iframe-mode" tabindex="0">
+      <iframe
+        class="yt-iframe-embed"
+        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&color=white"
+        title="${projTitle || 'YouTube video player'}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  `;
+}
+
 /* ─── HELPERS ────────────────────────────────────────────────── */
 
 function _renderFeatured(proj, reverse, uiData, isArabic) {
@@ -519,13 +514,13 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
     ? `style="background-image: url('${thumbUrl}'); background-size: cover; background-position: center;"`
     : '';
 
-  const playLabel = (uiData && uiData.playVideo) || 'Play video';
+  const playLabel = 'Play video';
 
   let videoInner = '';
 
   if (isUpcoming) {
     // ── CASE 1: Scheduled Release (e.g. Coming in 22/8/2026) ──
-    const dateText = releaseDate ? (isArabic ? `قادم في ${releaseDate}` : `Coming in ${releaseDate}`) : (isArabic ? 'قريباً' : 'Coming Soon');
+    const dateText = releaseDate ? `Coming in ${releaseDate}` : 'Coming Soon';
     videoInner = `
       <div class="work-video-placeholder work-video-upcoming" ${bgStyle}>
         <div class="work-upcoming-badge">
@@ -541,7 +536,6 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
     `;
   } else if (!isPlayable) {
     // ── CASE 2: Coming Soon (No video yet / releaseIn: false without video) ──
-    const comingSoonText = isArabic ? 'قريباً' : 'Coming Soon';
     videoInner = `
       <div class="work-video-placeholder work-video-comingsoon" ${bgStyle}>
         <div class="work-upcoming-badge">
@@ -549,7 +543,7 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
             <polygon points="23 7 16 12 23 17 23 7"></polygon>
             <rect x="1" y="5" width="15" height="14" rx="3" ry="3"></rect>
           </svg>
-          <span>${comingSoonText}</span>
+          <span>Coming Soon</span>
         </div>
       </div>
     `;
@@ -600,12 +594,11 @@ function _renderFeatured(proj, reverse, uiData, isArabic) {
   `;
 }
 
-function _renderGallery(proj, workData, uiData) {
-  const localizedCaptions = (workData && workData.galleryCaptions) || [];
-  const shotsText = (uiData && uiData.shots) || 'shots';
+function _renderGallery(proj) {
+  const photos = proj.photos || [];
 
-  const photosHTML = proj.photos.map((photo, i) => {
-    const caption = localizedCaptions[i] || photo.caption || '';
+  const photosHTML = photos.map((photo, i) => {
+    const caption = photo.caption || '';
     return `
       <div
         class="work-gallery__item"
@@ -627,14 +620,14 @@ function _renderGallery(proj, workData, uiData) {
   }).join('');
 
   return `
-    <section class="work-gallery-section" aria-label="${workData.galleryTitle || proj.title}">
+    <section class="work-gallery-section" aria-label="${proj.title}">
       <div class="work-gallery-header">
         <div class="work-gallery-header__info">
-          <div class="page-chapter">${workData.galleryChapter || 'Renders & Stills'}</div>
-          <h2 class="page-title" style="font-size:clamp(1.4rem,2.5vw,2rem)">${workData.galleryTitle || proj.title}</h2>
-          <p class="page-subtitle">${workData.gallerySubtitle || proj.description}</p>
+          <div class="page-chapter">Renders &amp; Stills</div>
+          <h2 class="page-title" style="font-size:clamp(1.4rem,2.5vw,2rem)">${proj.title}</h2>
+          <p class="page-subtitle">${proj.description}</p>
         </div>
-        <div class="work-gallery-header__count mono text-muted">${proj.photos.length} ${shotsText}</div>
+        <div class="work-gallery-header__count mono text-muted">${photos.length} shots</div>
       </div>
 
       <div class="work-gallery" role="list">

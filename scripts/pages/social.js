@@ -7,18 +7,16 @@ window.NORIX_PAGES = window.NORIX_PAGES || {};
 window.NORIX_PAGES.social = {
 
   render() {
-    const i18n = window.NORIX_I18N;
-    const sData = (i18n && i18n.t('social')) || {};
-    const links = sData.links || window.NORIX_DATA.social || [];
+    const links = window.NORIX_DATA.social || [];
 
     const cardsHTML = links.map(link => _renderCard(link)).join('');
 
     return `
       <div id="page-social">
         <header class="social-header page-header">
-          <div class="page-chapter">${sData.chapter || '05 — Chapter'}</div>
-          <h1 class="page-title">${sData.title || 'Social'}</h1>
-          <p class="page-subtitle">${sData.subtitle || "Find me online. Let's connect."}</p>
+          <div class="page-chapter">05 — Chapter</div>
+          <h1 class="page-title">Social</h1>
+          <p class="page-subtitle">Find me online. Let's connect.</p>
         </header>
 
         <section aria-label="Social media links">
@@ -29,7 +27,7 @@ window.NORIX_PAGES.social = {
 
         <footer class="social-footer" aria-label="Footer">
           <p class="social-footer__text">
-            ${sData.footer || 'Built with passion by <span>Norix</span> · All rights reserved'}
+            Built with passion by <span>Norix</span> · All rights reserved
           </p>
         </footer>
       </div>

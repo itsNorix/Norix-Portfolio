@@ -7,9 +7,7 @@ window.NORIX_PAGES = window.NORIX_PAGES || {};
 window.NORIX_PAGES.talents = {
 
   render() {
-    const i18n = window.NORIX_I18N;
-    const tData = (i18n && i18n.t('talents')) || {};
-    const skills = tData.skills || window.NORIX_DATA.skills || [];
+    const skills = window.NORIX_DATA.skills || [];
 
     const skillsHTML = skills.map(skill => _renderSkill(skill)).join('');
 
@@ -24,9 +22,9 @@ window.NORIX_PAGES.talents = {
     return `
       <div id="page-talents">
         <header class="page-header">
-          <div class="page-chapter">${tData.chapter || '04 — Chapter'}</div>
-          <h1 class="page-title">${tData.title || 'Talents'}</h1>
-          <p class="page-subtitle">${tData.subtitle || "Skills I'm actively developing as a creative artist."}</p>
+          <div class="page-chapter">04 — Chapter</div>
+          <h1 class="page-title">Talents</h1>
+          <p class="page-subtitle">Skills I'm actively developing as a creative artist.</p>
         </header>
 
         <div class="talents-layout">
@@ -34,13 +32,13 @@ window.NORIX_PAGES.talents = {
           <!-- Left: intro copy -->
           <div class="talents-intro" aria-label="About my skills">
             <p class="talents-intro__quote">
-              ${tData.quote || '"I believe in learning by doing. Every project teaches me something new."'}
+              "I believe in learning by doing. Every project teaches me something new."
             </p>
             <p class="talents-intro__body">
-              ${tData.body || "These percentages reflect my honest self-assessment of each tool. I'm still growing — and that's exactly the point. Every percentage here will be higher next year."}
+              These percentages reflect my honest self-assessment of each tool. I'm still growing — and that's exactly the point. Every percentage here will be higher next year.
             </p>
             <div class="talents-intro__note">
-              ${tData.note || '✦ &nbsp;Skill levels are updated based on hands-on project mastery'}
+              ✦ &nbsp;Skill levels are updated based on hands-on project mastery
             </div>
           </div>
 
@@ -53,7 +51,7 @@ window.NORIX_PAGES.talents = {
 
         <!-- Summary grid at bottom -->
         <section class="talents-summary" aria-label="Skills overview">
-          <div class="talents-summary__label">${tData.overview || 'Overview'}</div>
+          <div class="talents-summary__label">Overview</div>
           <div class="talents-summary__grid">
             ${summaryHTML}
           </div>

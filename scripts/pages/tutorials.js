@@ -7,19 +7,15 @@ window.NORIX_PAGES = window.NORIX_PAGES || {};
 window.NORIX_PAGES.tutorials = {
 
   render() {
-    const i18n = window.NORIX_I18N;
-    const tData = (i18n && i18n.t('tutorials')) || {};
-    const uiData = (i18n && i18n.t('ui')) || {};
-
     const playlists = window.NORIX_DATA.playlists || window.NORIX_DATA.tutorials || [];
     const hasPlaylists = playlists.length > 0 && playlists.some(p => p.videos && p.videos.length > 0);
 
     if (!hasPlaylists) {
       return `
         <header class="tutorials-header page-header">
-          <div class="page-chapter">${tData.chapter || '03 — Chapter'}</div>
-          <h1 class="page-title">${tData.title || 'Tutorials'}</h1>
-          <p class="page-subtitle">${tData.subtitle || 'Educational playlists, 3D breakdowns, and production guides.'}</p>
+          <div class="page-chapter">03 — Chapter</div>
+          <h1 class="page-title">Tutorials</h1>
+          <p class="page-subtitle">Educational playlists, 3D breakdowns, and production guides.</p>
         </header>
 
         <div class="tutorials-empty-card" aria-label="No tutorials yet">
@@ -29,21 +25,21 @@ window.NORIX_PAGES.tutorials = {
               <rect x="1" y="5" width="15" height="14" rx="3" ry="3"></rect>
             </svg>
           </div>
-          <div class="tutorials-empty-badge">${tData.emptyBadge || 'Coming Soon'}</div>
-          <h2 class="tutorials-empty-title">${tData.emptyTitle || 'There is no tutorials for now but i will make it soon as'}</h2>
-          <p class="tutorials-empty-subtitle">${tData.emptySubtitle || 'Subscribe to my YouTube channel to be the first to know when new tutorials launch.'}</p>
+          <div class="tutorials-empty-badge">Coming Soon</div>
+          <h2 class="tutorials-empty-title">There is no tutorials for now but i will make it soon as</h2>
+          <p class="tutorials-empty-subtitle">Subscribe to my YouTube channel to be the first to know when new tutorials launch.</p>
           <a
             href="https://www.youtube.com/@itsNorix-0"
             target="_blank"
             rel="noopener noreferrer"
             class="tutorials-empty-btn"
-            aria-label="${tData.channelLink || 'Visit Norix YouTube channel'}"
+            aria-label="Visit Norix YouTube channel"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1c.5-1.9.5-5.8.5-5.8z"/>
               <polygon points="9.8,15.5 15.8,12 9.8,8.5" fill="#fff"/>
             </svg>
-            ${tData.channelLink || 'Visit @itsNorix-0 on YouTube'}
+            Visit @itsNorix-0 on YouTube
           </a>
         </div>
       `;
@@ -59,29 +55,29 @@ window.NORIX_PAGES.tutorials = {
       >
         <span class="playlist-tab-badge">${pl.badge || 'Playlist'}</span>
         <span class="playlist-tab-title">${pl.title}</span>
-        <span class="playlist-tab-count">${(pl.videos || []).length} ${uiData.videosCount || 'videos'}</span>
+        <span class="playlist-tab-count">${(pl.videos || []).length} videos</span>
       </button>
     `).join('');
 
-    const playlistPanelsHTML = playlists.map((pl, idx) => _renderPlaylistPanel(pl, idx === 0, uiData)).join('');
+    const playlistPanelsHTML = playlists.map((pl, idx) => _renderPlaylistPanel(pl, idx === 0)).join('');
 
     return `
       <header class="tutorials-header page-header">
-        <div class="page-chapter">${tData.chapter || '03 — Chapter'}</div>
-        <h1 class="page-title">${tData.title || 'Tutorials'}</h1>
-        <p class="page-subtitle">${tData.subtitle || 'Educational playlists, step-by-step 3D guides, and video breakdowns.'}</p>
+        <div class="page-chapter">03 — Chapter</div>
+        <h1 class="page-title">Tutorials</h1>
+        <p class="page-subtitle">Educational playlists, step-by-step 3D guides, and video breakdowns.</p>
         <a
           href="https://www.youtube.com/@itsNorix-0"
           target="_blank"
           rel="noopener noreferrer"
           class="tutorials-channel-link"
-          aria-label="${tData.channelLink || 'Visit Norix YouTube channel'}"
+          aria-label="Visit Norix YouTube channel"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1c.5-1.9.5-5.8.5-5.8z"/>
             <polygon points="9.8,15.5 15.8,12 9.8,8.5" fill="#fff"/>
           </svg>
-          ${tData.channelLink || 'Visit @itsNorix-0 on YouTube'}
+          Visit @itsNorix-0 on YouTube
         </a>
       </header>
 
@@ -230,12 +226,12 @@ window.NORIX_PAGES.tutorials = {
 };
 
 /* ─── RENDER PLAYLIST PANEL ────────────────────────────────────── */
-function _renderPlaylistPanel(playlist, isActive, uiData) {
+function _renderPlaylistPanel(playlist, isActive) {
   const videos = playlist.videos || [];
   const firstVideo = videos[0] || {};
-  const prevLabel = (uiData && uiData.prev) || 'Prev';
-  const nextLabel = (uiData && uiData.next) || 'Next';
-  const contentLabel = (uiData && uiData.playlistContent) || 'Playlist Content';
+  const prevLabel = 'Prev';
+  const nextLabel = 'Next';
+  const contentLabel = 'Playlist Content';
 
   const queueItemsHTML = videos.map((vid, idx) => {
     const thumbUrl = _getVideoThumb(vid);

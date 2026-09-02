@@ -25,19 +25,24 @@
   <meta name="twitter:description" content="Portfolio of 3D art, animation, photography, and visual design." />
   <meta name="twitter:creator" content="@itsNorix_0" />
 
-  <!-- ═══ CONFIG (loaded first — sets theme/lang before CSS) ════════
-       Edit data/config.js to change name, theme, language, colors.
+  <!-- ═══ CONFIG (loaded first — sets theme before CSS) ════════
+       Edit data/config.js to change name, theme, colors.
   ════════════════════════════════════════════════════════════════ -->
   <script src="data/config.js"></script>
   <script>
     (function () {
       var cfg = window.NORIX_CONFIG || {};
       var theme = cfg.defaultTheme || 'dark';
-      var lang  = cfg.defaultLang  || 'en';
       document.documentElement.setAttribute('data-theme', theme);
-      document.documentElement.setAttribute('lang', lang);
-      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
       if (cfg.accentColor) document.documentElement.style.setProperty('--accent', cfg.accentColor);
+      // Hide mobile theme toggle if disabled in config
+      var feat = cfg.features || {};
+      if (feat.showThemeToggle === false) {
+        document.addEventListener('DOMContentLoaded', function () {
+          var tb = document.querySelector('.mobile-topbar .theme-toggle-btn');
+          if (tb) tb.style.display = 'none';
+        });
+      }
     })();
   </script>
 
@@ -83,12 +88,6 @@
       </div>
 
       <div class="mobile-topbar__right">
-        <!-- Language Switcher Button -->
-        <button class="ui-control-btn lang-toggle-btn" aria-label="Toggle Language" title="Switch Language">
-          <span style="font-size: 13px; margin-inline-end: 2px;">🌐</span>
-          <span class="lang-btn-text">AR</span>
-        </button>
-
         <!-- Theme Switcher Button -->
         <button class="ui-control-btn theme-toggle-btn icon-only" aria-label="Toggle Dark/Light Mode"
           title="Toggle Theme">
@@ -146,12 +145,11 @@
   <script src="data/tutorials.js"></script>
   <script src="data/skills.js"></script>
   <script src="data/social.js"></script>
-  <script src="data/translations.js"></script>
 
   <!-- ═══════════════════════════════════════════════════════════
        CORE CONTROLLERS & COMPONENTS
   ═══════════════════════════════════════════════════════════ -->
-  <script src="scripts/i18n.js"></script>
+  <script src="scripts/theme.js"></script>
   <script src="scripts/components/sidebar.js"></script>
   <script src="scripts/components/lightbox.js"></script>
   <script src="scripts/components/skillBar.js"></script>
@@ -168,17 +166,14 @@
   <!-- ═══════════════════════════════════════════════════════════
        APP BOOTSTRAP
   ═══════════════════════════════════════════════════════════ -->
-  <script src="scripts/cloud-sync.js"></script>
   <script src="scripts/router.js"></script>
   <script src="scripts/main.js"></script>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SITE PROTECTION & OWNER CONSOLE
+       SITE PROTECTION
        protect.js — disables right-click, copy watermark, Ctrl+U
-       owner.js   — secret admin panel (NORIX_OWNER.help() in console)
   ═══════════════════════════════════════════════════════════ -->
   <script src="scripts/protect.js"></script>
-  <script src="scripts/owner.js"></script>
 
 </body>
 

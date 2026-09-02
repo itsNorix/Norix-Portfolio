@@ -24,9 +24,7 @@ window.NORIX_ROUTER = (function () {
 
     const container   = document.getElementById('page-container');
     const oldPage     = container.querySelector('.page.page-active');
-    const isRTL       = document.documentElement.dir === 'rtl';
     
-    // In RTL, forward moves from left, backward from right
     let enterClass = newIndex > _currentIdx ? 'page-enter-right' : 'page-enter-left';
     let exitClass  = newIndex > _currentIdx ? 'page-exit-left' : 'page-exit-right';
 
@@ -128,7 +126,7 @@ window.NORIX_ROUTER = (function () {
   }
 
   function _updateDocumentTitle(id) {
-    const nav = (window.NORIX_I18N && window.NORIX_I18N.t('navigation')) || _navItems;
+    const nav = window.NORIX_DATA.navigation || _navItems;
     const item = nav.find(n => n.id === id);
     const label = item ? item.label : id;
     document.title = 'Norix — ' + label;

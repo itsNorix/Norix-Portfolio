@@ -7,15 +7,14 @@ window.NORIX_PAGES = window.NORIX_PAGES || {};
 window.NORIX_PAGES.about = {
 
   render() {
-    const i18n = window.NORIX_I18N;
-    const d = (i18n && i18n.t('about')) || window.NORIX_DATA.about;
+    const d = window.NORIX_DATA.about || {};
 
     const tagsHTML = (d.tags || []).map(t =>
       `<span class="about-tag">${t}</span>`
     ).join('');
 
     const bioParagraphs = d.bio || [];
-    const nameToHighlight = i18n && i18n.getLang() === 'ar' ? 'نوريكس' : 'Norix';
+    const nameToHighlight = d.name || 'Norix';
     const regex = new RegExp(`\\b${nameToHighlight}\\b`, 'g');
     
     const leadText = bioParagraphs[0]
@@ -156,7 +155,7 @@ window.NORIX_PAGES.about = {
           const target = btn.getAttribute('data-nav');
           if (!target) return;
           e.preventDefault();
-          const nav = (window.NORIX_I18N && window.NORIX_I18N.t('navigation')) || window.NORIX_DATA.navigation;
+          const nav = window.NORIX_DATA.navigation || [];
           const idx = nav.findIndex(n => n.id === target);
           if (idx !== -1 && window.NORIX_ROUTER) {
             window.NORIX_ROUTER.navigate(target, idx);
