@@ -21,7 +21,7 @@ window.NORIX_DATA.about = {
   badge: 'PROFILE // ABOUT ME',
 
   /* Current status */
-  status: 'Open for Freelance & Collaboration',
+  status: 'Not Accepting Any Projects At The Moment.',
 
   /* Interests / tags shown under the title */
   tags: ['3D Art', 'Animation', 'Photography', 'Visual Design', 'Video Production'],
