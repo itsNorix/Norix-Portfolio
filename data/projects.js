@@ -72,6 +72,7 @@ window.NORIX_DATA.projects = [
       { src: 'assets/images/Lights-Craft-Traller-Thumbnail.jpg', alt: 'Lights Craft Scene', caption: 'Lights Craft — Youtube Thumbnail' },
       { src: 'assets/images/Huggy-Photo.png', alt: 'Huggy 3D Model', caption: 'Huggy — Character Scene' },
       { src: 'assets/images/Pomni-Stand.png', alt: 'Pomni Stand', caption: 'Pomni Stand — 3D Render' },
+      { src: 'assets/images/HeHeHe_00000.jpg', alt: 'Fury Team 3D Logo', caption: 'Fury Team 3D Logo — 3D Render' },
     ],
   },
 
