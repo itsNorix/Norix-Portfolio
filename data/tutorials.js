@@ -14,7 +14,7 @@ window.NORIX_DATA = window.NORIX_DATA || {};
 
 /* Set to empty array for now — update when you release tutorials */
 window.NORIX_DATA.playlists = [
-  /*
+  
   {
     id: 'blender-basics',
     title: 'Blender 3D — Complete Beginner Series',
