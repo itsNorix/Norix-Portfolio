@@ -14,6 +14,7 @@ window.NORIX_DATA = window.NORIX_DATA || {};
 
 /* Set to empty array for now — update when you release tutorials */
 window.NORIX_DATA.playlists = [
+  /*
   {
     id: 'blender-basics',
     title: 'Blender 3D — Complete Beginner Series',
@@ -27,7 +28,7 @@ window.NORIX_DATA.playlists = [
         description: 'Explore the Blender UI, 3D viewport navigation, object modes, and essential hotkeys for beginners.',
         duration: '12:34',
         videoId: 'YOUR_VIDEO_ID_2',
-        videoFile: 'assets/videos/0021-0044.mkv',
+        videoFile: '',
         thumbnail: '',
         url: 'https://www.youtube.com/@itsNorix-0',
       },
@@ -41,6 +42,7 @@ window.NORIX_DATA.playlists = [
         thumbnail: '',
         url: 'https://www.youtube.com/@itsNorix-0',
       },
+      /*
     ],
   },
 ];
