@@ -50,7 +50,7 @@ window.NORIX_DATA.projects = [
     description: 'A fan-made animated sequence inspired by the Murder Drones series. Built in Blender with custom character rigging, expressive lighting, and dynamic camera work.',
     tags: ['Blender', '3D Animation', 'Fan Art', 'Cinematic'],
 
-    video-youtube: '', // paste the YouTube video ID here
+    videoid: '', // paste the YouTube video ID here
     thumbnail: '',      // OPTIONAL: custom thumbnail override
 
     releaseIn: false,
