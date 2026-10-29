@@ -26,7 +26,7 @@ window.NORIX_DATA.playlists = [
         title: '01. Getting Started with Blender — Interface & Navigation',
         description: 'Explore the Blender UI, 3D viewport navigation, object modes, and essential hotkeys for beginners.',
         duration: '12:34',
-        videoId: 'YOUR_VIDEO_ID_1',
+        videoId: 'azhpun-Yvhc',
         videoFile: '',
         thumbnail: '',
         url: 'https://www.youtube.com/@itsNorix-0',
